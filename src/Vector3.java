@@ -1,4 +1,9 @@
 public class Vector3 {
+	public enum Axis {
+		X,
+		Y,
+		Z,
+	}
 	public double x, y, z;
 
 	public Vector3(double x, double y, double z) {
@@ -50,4 +55,12 @@ public class Vector3 {
 		return Math.sqrt(x * x + y * y + z * z);
 	}
 
+	@Override
+	public String toString() {
+		return "{" +
+						"x=" + x +
+						", y=" + y +
+						", z=" + z +
+						'}';
+	}
 }

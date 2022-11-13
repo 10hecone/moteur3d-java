@@ -1,3 +1,8 @@
-package PACKAGE_NAME;public class Primitive {
-    public Primitive(){}
+public enum Primitive {
+	// primitives
+	Plane,
+	Cube,
+	Pyramid,
+	Triangle,
+	Tetrahedron,
 }
