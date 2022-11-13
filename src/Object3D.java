@@ -21,6 +21,9 @@ public class Object3D {
 		else if (primitive == Primitive.Tetrahedron) {
 			makeTetrahedron();
 		}
+		else if (primitive == Primitive.Dypiramid) {
+			makeDipyramid();
+		}
 	}
 
 	public Object3D(Vector3 position) {
@@ -120,6 +123,29 @@ public class Object3D {
 		edges[3] = new Edge(vertices[0], vertices[3]); // top
 		edges[4] = new Edge(vertices[1], vertices[3]); // top
 		edges[5] = new Edge(vertices[2], vertices[3]); // top
+	}
 
+	public  void makeDipyramid() {
+		vertices = new Vector3[6];
+		vertices[0] = new Vector3(50, 50, 0);
+		vertices[1] = new Vector3(100, 50, 50);
+		vertices[2] = new Vector3(50, 50, 100);
+		vertices[3] = new Vector3(0, 50, 50);
+		vertices[4] = new Vector3(50, 100, 50);
+		vertices[5] = new Vector3(50, 0, 50);
+
+		edges = new Edge[12];
+		edges[0] = new Edge(vertices[0], vertices[1]);
+		edges[1] = new Edge(vertices[1], vertices[2]);
+		edges[2] = new Edge(vertices[2], vertices[3]);
+		edges[3] = new Edge(vertices[3], vertices[0]);
+		edges[4] = new Edge(vertices[0], vertices[4]);
+		edges[5] = new Edge(vertices[1], vertices[4]);
+		edges[6] = new Edge(vertices[2], vertices[4]);
+		edges[7] = new Edge(vertices[3], vertices[4]);
+		edges[8] = new Edge(vertices[0], vertices[5]);
+		edges[9] = new Edge(vertices[1], vertices[5]);
+		edges[10] = new Edge(vertices[2], vertices[5]);
+		edges[11] = new Edge(vertices[3], vertices[5]);
 	}
 }
