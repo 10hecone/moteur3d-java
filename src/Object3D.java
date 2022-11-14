@@ -1,10 +1,14 @@
+import javax.vecmath.Vector3d;
+import java.awt.*;
+
 public class Object3D {
-	public Vector3[] vertices;
-	public Edge[] edges;
-	public Vector3 position;
-	public Vector3 rotation;
-	public Object3D(Primitive primitive, Vector3 position) {
-		rotation = new Vector3(0,0,0);
+	public Vector3d[] vertices;
+	public Vector3d position;
+	public Vector3d rotation;
+	public Vector3d scale;
+	public Face[] faces;
+	public Object3D(Primitive primitive, Vector3d position) {
+		rotation = new Vector3d(0,0,0);
 		this.position = position;
 		if (primitive == Primitive.Plane) {
 			makePlane();
@@ -42,17 +46,15 @@ public class Object3D {
 
 	private void makePlane() {
 		// create vertices
-		vertices = new Vector3[4];
-		vertices[0] = new Vector3(0, 0, 0); // top left
-		vertices[1] = new Vector3(100, 0, 0); // top right
-		vertices[2] = new Vector3(100, 100, 0); // bottom right
-		vertices[3] = new Vector3(0, 100, 0); // bottom left
-		// create edges
-		edges = new Edge[4];
-		edges[0] = new Edge(vertices[0], vertices[1]); // top
-		edges[1] = new Edge(vertices[1], vertices[2]); // right
-		edges[2] = new Edge(vertices[2], vertices[3]); // bottom
-		edges[3] = new Edge(vertices[3], vertices[0]); // left
+		vertices = new Vector3d[4];
+		vertices[0] = new Vector3d(-50, -50, 0); // top left
+		vertices[1] = new Vector3d(50, -50, 0); // top right
+		vertices[2] = new Vector3d(50, 50, 0); // bottom right
+		vertices[3] = new Vector3d(-50, 50, 0); // bottom left
+		// create faces
+		faces = new Face[2];
+		faces[0] = new Face(3, 0, 1);
+		faces[1] = new Face(1, 2, 3);
 	}
 
 	private void makeCube() {
@@ -96,23 +98,7 @@ public class Object3D {
 	}
 
 	private void makePyramid() {
-		// create vertices
-		vertices = new Vector3[5];
-		vertices[0] = new Vector3(0, 0, 0); // top left
-		vertices[1] = new Vector3(100, 0, 0); // top right
-		vertices[2] = new Vector3(100, 100, 0); // bottom right
-		vertices[3] = new Vector3(0, 100, 0); // bottom left
-		vertices[4] = new Vector3(50, 50, 100);
-		// create edges
-		edges = new Edge[8];
-		edges[0] = new Edge(vertices[0], vertices[1]); // top
-		edges[1] = new Edge(vertices[1], vertices[2]); // right
-		edges[2] = new Edge(vertices[2], vertices[3]); // bottom
-		edges[3] = new Edge(vertices[3], vertices[0]); // left
-		edges[4] = new Edge(vertices[4], vertices[0]);
-		edges[5] = new Edge(vertices[4], vertices[1]);
-		edges[6] = new Edge(vertices[4], vertices[2]);
-		edges[7] = new Edge(vertices[4], vertices[3]);
+
 	}
 
 	private void makeTriangle() {
@@ -157,18 +143,6 @@ public class Object3D {
 		vertices[4] = new Vector3d(0, 0, 50); // top
 		vertices[5] = new Vector3d(0, 0, -50); // bottom
 
-		edges = new Edge[12];
-		edges[0] = new Edge(vertices[0], vertices[1]);
-		edges[1] = new Edge(vertices[1], vertices[2]);
-		edges[2] = new Edge(vertices[2], vertices[3]);
-		edges[3] = new Edge(vertices[3], vertices[0]);
-		edges[4] = new Edge(vertices[0], vertices[4]);
-		edges[5] = new Edge(vertices[1], vertices[4]);
-		edges[6] = new Edge(vertices[2], vertices[4]);
-		edges[7] = new Edge(vertices[3], vertices[4]);
-		edges[8] = new Edge(vertices[0], vertices[5]);
-		edges[9] = new Edge(vertices[1], vertices[5]);
-		edges[10] = new Edge(vertices[2], vertices[5]);
-		edges[11] = new Edge(vertices[3], vertices[5]);
+
 	}
 }
