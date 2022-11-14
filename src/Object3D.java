@@ -25,9 +25,6 @@ public class Object3D {
 		else if (primitive == Primitive.Tetrahedron) {
 			makeTetrahedron();
 		}
-		else if (primitive == Primitive.Dypiramid) {
-			makeDipyramid();
-		}
 		scale = new Vector3d(1, 1, 1);
 		// replace null faces with empty faces
 		for (int i = 0; i < faces.length; i++) {
@@ -98,7 +95,26 @@ public class Object3D {
 	}
 
 	private void makePyramid() {
+		vertices = new Vector3d[5];
+		vertices[0] = new Vector3d(0, 50, 0); // top
+		vertices[1] = new Vector3d(-50, -50, -50); // front left
+		vertices[2] = new Vector3d(50, -50, -50); // front right
+		vertices[3] = new Vector3d(50, -50, 50); // back right
+		vertices[4] = new Vector3d(-50, -50, 50); // back left
 
+		faces = new Face[6];
+		faces[0] = new Face(0, 1, 2);
+		faces[0].color = Color.red;
+		faces[1] = new Face(0, 2, 3);
+		faces[1].color = Color.green;
+		faces[2] = new Face(0, 3, 4);
+		faces[2].color = Color.blue;
+		faces[3] = new Face(0, 4, 1);
+		faces[3].color = Color.yellow;
+		faces[4] = new Face(1, 4, 3);
+		faces[4].color = Color.orange;
+		faces[5] = new Face(1, 3, 2);
+		faces[5].color = Color.pink;
 	}
 
 	private void makeTriangle() {
@@ -132,17 +148,5 @@ public class Object3D {
 		faces[2].color = Color.blue;
 		faces[3] = new Face(0, 2, 1);
 		faces[3].color = Color.yellow;
-	}
-
-	private void makeDipyramid() {
-		vertices = new Vector3d[6];
-		vertices[0] = new Vector3d(-50, -50, 0); // top left front
-		vertices[1] = new Vector3d(50, -50, 0); // top right front
-		vertices[2] = new Vector3d(50, 50, 0); // bottom right front
-		vertices[3] = new Vector3d(-50, 50, 0); // bottom left front
-		vertices[4] = new Vector3d(0, 0, 50); // top
-		vertices[5] = new Vector3d(0, 0, -50); // bottom
-
-
 	}
 }

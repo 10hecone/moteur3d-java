@@ -5,5 +5,4 @@ public enum Primitive {
 	Pyramid,
 	Triangle,
 	Tetrahedron,
-	Dypiramid,
 }

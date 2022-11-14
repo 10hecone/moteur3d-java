@@ -6,7 +6,7 @@ public class Main {
 	public static void main(String[] args) {
 		// run Frame
 		Frame frame = new Frame();
-		Object3D object3D = new Object3D(Primitive.Dypiramid, new Vector3d(200, 200, 0));
+		Object3D object3D = new Object3D(Primitive.Pyramid, new Vector3d(200, 200, 0));
 		frame.world.objects.add(object3D);
 		// add 3 sliders to rotate the object
 		JSlider sliderX = new JSlider(-180, 180, 0);
