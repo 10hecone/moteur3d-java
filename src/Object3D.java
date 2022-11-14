@@ -1,5 +1,6 @@
 import javax.vecmath.Vector3d;
 import java.awt.*;
+import java.util.Objects;
 
 public class Object3D {
 	public Vector3d[] vertices;
@@ -27,7 +28,7 @@ public class Object3D {
 		}
 		scale = new Vector3d(1, 1, 1);
 		// replace null faces with empty faces
-		for (int i = 0; i < faces.length; i++) {
+		for (int i = 0; i < Objects.requireNonNull(faces).length; i++) {
 			if (faces[i] == null) {
 				faces[i] = new Face(0, 0, 0);
 			}
