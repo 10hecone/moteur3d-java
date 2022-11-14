@@ -7,7 +7,8 @@ import java.util.List;
 public class World extends JPanel {
 	public static Camera camera;
 	public List<Object3D> objects;
-
+	// list of functions to be called every frame
+	public List<Runnable> updateFunctions = new ArrayList<>();
 	public World(Camera camera) {
 		// set background color
 		setBackground(Color.WHITE);
@@ -26,6 +27,10 @@ public class World extends JPanel {
 	}
 
 	public void Update() {
+		// update all objects
+		for (Runnable r : updateFunctions) {
+            r.run();
+        }
 		repaint();
 	}
 
