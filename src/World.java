@@ -42,7 +42,7 @@ public class World extends JPanel {
 			// draw points
 			for (Vector3d point : object.vertices) {
 				Vector3d projectedPoint = camera.project(point, object.rotation, object.position, object.scale);
-				g.fillOval((int) projectedPoint.x, (int) projectedPoint.y, 5, 5);
+				g.fillOval((int) projectedPoint.x-2, (int) projectedPoint.y-2, 5, 5);
 			}
 			if (object.faces == null) continue;
 			for (Face face : object.faces) {
@@ -50,19 +50,14 @@ public class World extends JPanel {
 				Vector3d p1 = camera.project(face.p1, object);
 				Vector3d p2 = camera.project(face.p2, object);
 				Vector3d p3 = camera.project(face.p3, object);
-				Vector3d V = new Vector3d(p2.x - p1.x, p2.y - p1.y, p2.z - p1.z);
-				Vector3d W = new Vector3d(p3.x - p1.x, p3.y - p1.y, p3.z - p1.z);
-				Vector3d normal = new Vector3d(
-						V.y * W.z - V.z * W.y,
-						V.z * W.x - V.x * W.z,
-						V.x * W.y - V.y * W.x
-				);
+				Vector3d normal = new Vector3d();
+				normal.cross(new Vector3d(p2.x - p1.x, p2.y - p1.y, p2.z - p1.z), new Vector3d(p3.x - p1.x, p3.y - p1.y, p3.z - p1.z));
 				// if normal.z is positive, the face is facing the camera
 				if (normal.z > 0) {
 					// draw face
 					g.setColor(face.color);
-					int[] xPoints = {(int) p1.x, (int) p2.x, (int) p3.x};
-					int[] yPoints = {(int) p1.y, (int) p2.y, (int) p3.y};
+					int[] xPoints = {(int) Math.round(p1.x), (int)Math.round(p2.x), (int) Math.round(p3.x)};
+					int[] yPoints = {(int) Math.round(p1.y), (int)Math.round(p2.y), (int) Math.round(p3.y)};
 					g.fillPolygon(xPoints, yPoints, 3);
 				}
 			}

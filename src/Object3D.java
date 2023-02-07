@@ -1,6 +1,5 @@
 import javax.vecmath.Vector3d;
 import java.awt.*;
-import java.util.Objects;
 
 public class Object3D {
 	public Vector3d[] vertices;
@@ -11,29 +10,14 @@ public class Object3D {
 	public Object3D(Primitive primitive, Vector3d position) {
 		rotation = new Vector3d(0,0,0);
 		this.position = position;
-		if (primitive == Primitive.Plane) {
-			makePlane();
-		}
-		else if (primitive == Primitive.Cube) {
-			makeCube();
-		}
-		else if (primitive == Primitive.Pyramid) {
-			makePyramid();
-		}
-		else if (primitive == Primitive.Triangle) {
-			makeTriangle();
-		}
-		else if (primitive == Primitive.Tetrahedron) {
-			makeTetrahedron();
+		switch (primitive) {
+			case Plane -> makePlane();
+			case Cube -> makeCube();
+			case Pyramid -> makePyramid();
+			case Triangle -> makeTriangle();
+			case Tetrahedron -> makeTetrahedron();
 		}
 		scale = new Vector3d(1, 1, 1);
-		// replace null faces with empty faces
-		for (int i = 0; i < Objects.requireNonNull(faces).length; i++) {
-			if (faces[i] == null) {
-				faces[i] = new Face(0, 0, 0);
-			}
-			faces[i].object = this;
-		}
 	}
 
 	public Object3D(Vector3d position) {

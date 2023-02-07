@@ -6,8 +6,10 @@ public class Main {
 	public static void main(String[] args) {
 		// run Frame
 		Frame frame = new Frame();
-		Object3D object3D = new Object3D(Primitive.Pyramid, new Vector3d(200, 200, 0));
+		Object3D object3D = new Object3D(Primitive.Tetrahedron, new Vector3d(200, 200, 0));
+		Object3D object3D2 = new Object3D(Primitive.Cube, new Vector3d(200, 500, 0));
 		frame.world.objects.add(object3D);
+		frame.world.objects.add(object3D2);
 		// add 3 sliders to rotate the object
 		JSlider sliderX = new JSlider(-180, 180, 0);
 		sliderX.addChangeListener(e -> object3D.rotation.x = sliderX.getValue() );
@@ -20,5 +22,6 @@ public class Main {
 		frame.add(sliderX, BorderLayout.SOUTH);
 		frame.add(sliderY, BorderLayout.WEST);
 		frame.add(sliderZ, BorderLayout.EAST);
+		frame.setVisible(true);
 	}
 }

@@ -1,5 +1,3 @@
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 
 import javax.vecmath.Vector3d;
 
@@ -10,22 +8,28 @@ public class Camera extends Object3D {
 	}
 
 	/**
-	 * @param alpha rotation around z axis
-	 * @param beta rotation around y axis
-	 * @param gamma rotation around x axis
+	 * @param alpha rotation around z-axis
+	 * @param beta rotation around y-axis
+	 * @param gamma rotation around x-axis
 	 * @return the rotation matrix
 	 */
-	private double[] @NotNull [] rotationMatrix(double alpha, double beta, double gamma) {
+	private double[] [] rotationMatrix(double alpha, double beta, double gamma) {
 		double[][] matrix = new double[3][3];
-		matrix[0][0] = Math.cos(alpha)*Math.cos(beta);
-		matrix[0][1] = Math.cos(alpha)*Math.sin(beta)*Math.sin(gamma)-Math.sin(alpha)*Math.cos(gamma);
-		matrix[0][2] = Math.cos(alpha)*Math.sin(beta)*Math.cos(gamma)+Math.sin(alpha)*Math.sin(gamma);
-		matrix[1][0] = Math.sin(alpha)*Math.cos(beta);
-		matrix[1][1] = Math.sin(alpha)*Math.sin(beta)*Math.sin(gamma)+Math.cos(alpha)*Math.cos(gamma);
-		matrix[1][2] = Math.sin(alpha)*Math.sin(beta)*Math.cos(gamma)-Math.cos(alpha)*Math.sin(gamma);
-		matrix[2][0] = -Math.sin(beta);
-		matrix[2][1] = Math.cos(beta)*Math.sin(gamma);
-		matrix[2][2] = Math.cos(beta)*Math.cos(gamma);
+		double cosAlpha = Math.cos(alpha);
+		double sinAlpha = Math.sin(alpha);
+		double cosBeta = Math.cos(beta);
+		double sinBeta = Math.sin(beta);
+		double cosGamma = Math.cos(gamma);
+		double sinGamma = Math.sin(gamma);
+		matrix[0][0] = cosAlpha * cosBeta;
+		matrix[0][1] = cosAlpha * sinBeta * sinGamma - sinAlpha * cosGamma;
+		matrix[0][2] = cosAlpha * sinBeta * cosGamma + sinAlpha * sinGamma;
+		matrix[1][0] = sinAlpha * cosBeta;
+		matrix[1][1] = sinAlpha * sinBeta * sinGamma + cosAlpha * cosGamma;
+		matrix[1][2] = sinAlpha * sinBeta * cosGamma - cosAlpha * sinGamma;
+		matrix[2][0] = -sinBeta;
+		matrix[2][1] = cosBeta * sinGamma;
+		matrix[2][2] = cosBeta * cosGamma;
 		return matrix;
 	}
 
@@ -35,8 +39,8 @@ public class Camera extends Object3D {
 	 * @param vector vector to multiply
 	 * @return the result of the multiplication
 	 */
-	@Contract(pure = true)
-	private double @NotNull [] matriceMultiplication(double[][] matrix, double[] vector) {
+
+	private double  [] matriceMultiplication(double[][] matrix, double[] vector) {
 		double[] result = new double[3];
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 3; j++) {
@@ -52,8 +56,7 @@ public class Camera extends Object3D {
 	 * @param rotation rotation of the 3d object
 	 * @return transformed point
 	 */
-	public Vector3d project(@NotNull Vector3d point, @NotNull Vector3d rotation,@NotNull Vector3d objectPosition,
-	                       @NotNull Vector3d scale) {
+	public Vector3d project(Vector3d point, Vector3d rotation,Vector3d objectPosition, Vector3d scale) {
 		double[] vector = new double[3];
 		vector[0] = point.x * scale.x;
 		vector[1] = point.y * scale.y;
