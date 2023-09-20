@@ -4,10 +4,9 @@ public class Frame extends JFrame {
 	public Frame() {
 		setTitle("Moteur3d Test");
 		setSize(800, 600);
-		// set fullscreen windowed
-		setExtendedState(JFrame.MAXIMIZED_BOTH);
-		setUndecorated(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		World.screenHeight = getHeight();
+		World.screenWidth = getWidth();
+		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setVisible(true);
 
 		world = new World(new Camera());
